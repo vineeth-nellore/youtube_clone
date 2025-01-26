@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="toggle-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <img src="./img/logo.PNG" class="logo" alt="logo"/>
+        <div class="search-box">
+            <input type="text" placeholder="Search" class="search-bar" />
+            <button class="search-btn">
+                <img src="./img/icons/search.PNG"/>
+            </button>
+        </div>
+        <div class="user-options">
+            <img src="img/icons/video.PNG" class="icon">
+            <img src="img/icons/grid.PNG" class="icon">
+            <img src="img/icons/bell.PNG" class="icon">
+            <div class="user-dp">
+                <img src="img/profile-pic.png">
+            </div>
+        </div>
+    </nav>
+
+    <div class="side-bar">
+        <a href="#" class="links active"><img src="./img/icons/home.PNG">home</a>
+        <a href="#" class="links"><img src="img/icons/explore.PNG" alt="">explore</a>
+        <a href="#" class="links"><img src="img/icons/subscription.PNG" alt="">subscription</a>
+        <hr class="seperator">
+        <a href="#" class="links"><img src="img/icons/library.PNG" alt="">library</a>
+        <a href="#" class="links"><img src="img/icons/history.PNG" alt="">history</a>
+        <a href="#" class="links"><img src="img/icons/your-video.PNG" alt="">your video</a>
+        <a href="#" class="links"><img src="img/icons/watch-later.PNG" alt="">watch leater</a>
+        <a href="#" class="links"><img src="img/icons/liked video.PNG" alt="">like video</a>
+        <a href="#" class="links"><img src="img/icons/show more.PNG" alt="">show more</a>
+    </div>
+
+    <div class="filters">
+        <button class="filter-options active">all</button>
+        <button class="filter-options">CSS</button>
+        <button class="filter-options">web development</button>
+        <button class="filter-options">python</button>
+        <button class="filter-options">entertainment</button>
+        <button class="filter-options">marvel</button>
+        <button class="filter-options">javascript</button>
+        <button class="filter-options">artificial intelligence</button>
+        <button class="filter-options">machine learning</button>
+        <button class="filter-options">trending</button>
+    </div>
+
+    <div class="video-container" id="video-container" >
+        <div id="loading-spinner" class="spinner">
+            <div class="circle"></div>
+        </div>
+
+    </div>
+</body>
+<script>
+    function generateId(){
+        return Math.random.toString(36).substring(2,12);
+    }
+
+    const videos=[
+        {
+            videoId: generateId(),
+            thumbnail: '.img/thumbnails/1.webp',
+            channelIcon: 'img/profile-pic.png',
+            title: 'youtube clone 2021 | create working youtube clone',
+            channelName: 'modern web',
+            views: '60 views',
+            time: '1 day ago'
+        },    
+        {
+        videoId: generateId(),
+        thumbnail: 'img/thumbnails/2.webp',
+        channelIcon: 'img/profile-pic.png',
+        title: 'learn CSS in 2021 | Full Guide',
+        channelName: 'modern web',
+        views: '120 views',
+        time: '2 days ago'
+        },
+        {
+            videoId: generateId(),
+            thumbnail: 'img/thumbnails/3.webp',
+            channelIcon: 'img/profile-pic.png',
+            title: 'JavaScript tutorial | Master JS in 2021',
+            channelName: 'modern web',
+            views: '1,000 views',
+            time: '3 weeks ago'
+        },
+        {
+            videoId: generateId(),
+            thumbnail: 'img/thumbnails/4.webp',
+            channelIcon: 'img/profile-pic.png',
+            title: 'Python for beginners | Full course',
+            channelName: 'modern web',
+            views: '500 views',
+            time: '1 month ago'
+        },
+        {
+            videoId: generateId(),
+            thumbnail: 'img/thumbnails/5.webp',
+            channelIcon: 'img/profile-pic.png',
+            title: 'React JS crash course | Learn React in 2021',
+            channelName: 'modern web',
+            views: '2,500 views',
+            time: '2 months ago'
+        },
+        {
+            videoId: generateId(),
+            thumbnail: 'img/thumbnails/6.webp',
+            channelIcon: 'img/profile-pic.png',
+            title: 'Machine Learning basics | Intro to ML',
+            channelName: 'modern web',
+            views: '3,200 views',
+            time: '5 months ago'
+        }
+    ];
+
+    const videoContainer=document.getElementById('video-container');
+    const loadingSpinner=document.getElementById('loading-spinner');
+
+    function loadvideos(){
+        videos.forEach(video => {
+            const videoDiv=document.createElement('div');
+            videoDiv.classList.add('video');
+            videoDiv.innerHTML=`
+            <img src="${video.thumbnail}" class="thumbnail" alt="">
+            <div class="content">
+                <img src="${video.channelIcon}" class="channel-icon" alt="">
+                <div class="info">
+                    <h4 class="title">${video.title}</h4>
+                    <p class="channel-name">${video.channelName}</p>
+                    <p class="views-time">${video.views} • ${video.time}</p>
+                </div>
+            </div>
+            `;
+
+            videoDiv.addEventListener('click',()=>{
+                window.location.href=`video.html?videoId=${video.videoId}`;
+            });
+
+            videoContainer.appendChild(videoDiv);
+        });
+    }
+
+    window.onload=function(){
+        setTimeout(()=>{
+            loadingSpinner.style.display='none';
+            loadvideos();
+        },3000);
+    }
+</script>
+</html>
